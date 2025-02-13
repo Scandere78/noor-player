@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* Cartes de fonctionnalités */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 px-6">
-        <Link href="/lecture" passHref>
+        <Link href="/lecture">
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg cursor-pointer">
             <h2 className="text-2xl font-bold text-green-400">📖 Lecture du Coran</h2>
             <p className="mt-2 text-gray-300">Lisez le Coran avec traduction et tafsir.</p>
