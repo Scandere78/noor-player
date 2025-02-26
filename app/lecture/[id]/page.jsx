@@ -6,33 +6,40 @@ export default function LecturePage({ params }) {
   const [sourate, setSourate] = useState(null);
   const [showTranslation, setShowTranslation] = useState(false);
   const [translations, setTranslations] = useState([]);
-  const [error, setError] = useState(null); // État pour gérer les erreurs
+  const [error, setError] = useState(null);
 
-  // Fonction pour récupérer les données de la sourate
   useEffect(() => {
     async function fetchSourate() {
       try {
-        // Récupérer les données de la sourate
+        // Récupérer les versets en arabe
         const res = await fetch(`https://api.alquran.cloud/v1/surah/${params.id}`);
         if (!res.ok) throw new Error('Erreur lors de la récupération de la sourate');
         const data = await res.json();
         setSourate(data.data);
 
-        // Utilisation de l'API Quran.com pour récupérer les traductions en français
-        const translationRes = await fetch(`https://api.quran.com/api/v4/verses/${params.id}?language=fr`);
+        // Récupérer la traduction française
+        const translationRes = await fetch(`https://api.quran.com/api/v4/quran/translations/85?chapter_number=${params.id}`);
         if (!translationRes.ok) throw new Error('Erreur lors de la récupération des traductions');
         const translationData = await translationRes.json();
-        setTranslations(translationData.data.ayahs); // Stocke les traductions
+
+        console.log("Traductions reçues :", JSON.stringify(translationData, null, 2));
+
+        // Vérifier que l'API retourne bien un tableau de traductions
+        if (translationData.translations && Array.isArray(translationData.translations)) {
+          setTranslations(translationData.translations.map(t => t.text)); // On récupère juste le texte des traductions
+        } else {
+          throw new Error("Structure des traductions inattendue");
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération :", error);
-        setError(error.message); // Stocker le message d'erreur
+        setError(error.message);
       }
     }
 
     fetchSourate();
   }, [params.id]);
 
-  if (error) return <p className="text-red-500">{error}</p>; // Affichage d'erreur
+  if (error) return <p className="text-red-500">{error}</p>;
   if (!sourate) return <p>Chargement...</p>;
 
   const toggleTranslation = () => {
@@ -41,15 +48,15 @@ export default function LecturePage({ params }) {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-bold">{sourate.englishName} - {sourate.name}</h1>
-      <p className="text-gray-600">Révélation : {sourate.revelationType}</p>
+      <h1 className="text-2xl text-white font-bold">{sourate.englishName} - {sourate.name}</h1>
+      <p className="text-white">Révélation : {sourate.revelationType}</p>
       <p className="mt-2 mb-4">Nombre de versets : {sourate.numberOfAyahs}</p>
 
       <button
         onClick={toggleTranslation}
         className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
       >
-        {showTranslation ? "Masquer la traduction" : "Afficher la traduction en français"}
+        {showTranslation ? "Masquer la traduction" : "Afficher la traduction en English"}
       </button>
 
       <div className="space-y-4 mt-5">
@@ -60,7 +67,7 @@ export default function LecturePage({ params }) {
 
             {showTranslation && translations[index] && (
               <p className="text-md mt-2 text-left text-blue-600">
-                {translations[index]?.text || "Pas de traduction disponible"} {/* Si traduction inexistante */}
+                {translations[index] || "Pas de traduction disponible"}
               </p>
             )}
           </div>

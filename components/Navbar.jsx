@@ -13,14 +13,14 @@ export default function Navbar() {
 
         {/* Liens de navigation */}
         <div className="space-x-6">
-          <Link href="/ecoute">
-            <span className="hover:text-green-400 cursor-pointer">Écoute</span>
-          </Link>
           <Link href="/lecture">
             <span className="hover:text-green-400 cursor-pointer">Lecture</span>
           </Link>
-          <Link href="/Récitateur">
-            <span className="hover:text-green-400 cursor-pointer">Récitateur</span>
+          <Link href="/sourates">
+            <span className="hover:text-green-400 cursor-pointer">Récitation</span>
+          </Link>
+          <Link href="/ecoute">
+            <span className="hover:text-green-400 cursor-pointer">Ecoute</span>
           </Link>
           <Link href="/about">
             <span className="hover:text-green-400 cursor-pointer">À propos</span>
