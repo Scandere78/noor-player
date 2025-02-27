@@ -1,4 +1,5 @@
- 'use client';
+'use client';
+
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
@@ -28,7 +29,7 @@ const recitersInfo = {
 };
 
 const souratesNames = [
-   "Al-Fatiha", "Al-Baqarah", "Aali Imran", "An-Nisa", "Al-Ma'idah", "Al-An'am", "Al-A'raf", "Al-Anfal", "At-Tawbah", "Yunus",
+  "Al-Fatiha", "Al-Baqarah", "Aali Imran", "An-Nisa", "Al-Ma'idah", "Al-An'am", "Al-A'raf", "Al-Anfal", "At-Tawbah", "Yunus",
   "Hud", "Yusuf", "Ar-Ra'd", "Ibrahim", "Al-Hijr", "An-Nahl", "Al-Isra", "Al-Kahf", "Maryam", "Ta-Ha",
   "Al-Anbiya", "Al-Hajj", "Al-Muminun", "An-Nur", "Al-Furqan", "Ash-Shu'ara", "An-Naml", "Al-Qasas", "Al-Ankabut", "Ar-Rum",
   "Luqman", "As-Sajda", "Al-Ahzab", "Saba", "Fatir", "Ya-Sin", "As-Saffat", "Sad", "Az-Zumar", "Ghafir",
@@ -52,18 +53,50 @@ export default function Recitations({ params }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const audioRef = useRef(new Audio());
+  const [isClient, setIsClient] = useState(false); // Track if we're on the client side
+  const audioRef = useRef(null);
+
+  // Ensure Audio is initialized on the client side
+  useEffect(() => {
+    setIsClient(true); // Set state when the component is mounted on the client
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      audioRef.current = new Audio(); // Initialize the Audio object only on the client side
+    }
+  }, [isClient]);
 
   // Stop et réinitialise l'audio lorsque le récitateur change
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = "";
+      console.log(audioRef)
       setCurrentIndex(null);
       setIsPlaying(false);
       setProgress(0);
     }
-  }, [id]); // Dépendance sur l'ID du récitateur
+  }, [id]); 
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = ""; // Réinitialiser la source audio
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!reciterFolder) return;
@@ -102,6 +135,8 @@ export default function Recitations({ params }) {
     };
     audioRef.current.onended = () => setIsPlaying(false);
   };
+
+  if (!isClient) return null; // Avoid rendering anything until we're on the client
 
   return (
     <div className="p-6 min-h-screen bg-gray-900 text-white">
