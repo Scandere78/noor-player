@@ -9,7 +9,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 export default function Home() {
   const recitateurs = [
     { name: "Abdul Basit", image: "/img/abdul-basit.webp" },
-    { name: "Mishary Rashid", image: "/img/mishary-rashid.webp" },
+    { name: "Mishary Rashid", image: "/img/mishary.webp" },
     { name: "Saad Al Ghamdi", image: "/img/saad-al-ghamdi.jpg" },
     { name: "Yasser Al Dosari", image: "/img/yasser-al-dossari.png" },
   ];
@@ -18,7 +18,7 @@ export default function Home() {
     <div className="py-10 bg-gray-900 text-white min-h-screen">
       {/* Présentation */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-green-500">Bienvenue sur QuranApp</h1>
+        <h1 className="text-4xl font-extrabold text-green-500">Bienvenue sur NoorPlay</h1>
         <p className="mt-2 text-lg text-gray-300">
           Écoutez et lisez le Coran facilement avec une interface intuitive.
         </p>
