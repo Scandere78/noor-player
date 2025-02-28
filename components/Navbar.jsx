@@ -31,10 +31,10 @@ export default function Navbar() {
             <span className="hover:text-green-400 cursor-pointer">Lecture</span>
           </Link>
           <Link href="/sourates">
-            <span className="hover:text-green-400 cursor-pointer">Récitation</span>
+            <span className="hover:text-green-400 cursor-pointer">Écoute</span>
           </Link>
           <Link href="/ecoute">
-            <span className="hover:text-green-400 cursor-pointer">Ecoute</span>
+            <span className="hover:text-green-400 cursor-pointer">Dourous</span>
           </Link>
           <Link href="/about">
             <span className="hover:text-green-400 cursor-pointer">À propos</span>
@@ -56,10 +56,10 @@ export default function Navbar() {
             <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Lecture</span>
           </Link>
           <Link href="/sourates">
-            <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Récitation</span>
+            <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Écoute</span>
           </Link>
           <Link href="/ecoute">
-            <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Écoute</span>
+            <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Récitateurs</span>
           </Link>
           <Link href="/about">
             <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>À propos</span>

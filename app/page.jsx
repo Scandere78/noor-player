@@ -29,10 +29,10 @@ export default function Home() {
         <Link href="/lecture">
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg cursor-pointer">
             <h2 className="text-2xl font-bold text-green-400">📖 Lecture du Coran</h2>
-            <p className="mt-2 text-gray-300">Lisez le Coran avec traduction et tafsir.</p>
+            <p className="mt-2 text-gray-300">Lisez le Coran avec traduction.</p>
           </div>
         </Link>
-        <Link href="/ecoute" passHref>
+        <Link href="/sourates" passHref>
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg cursor-pointer">
             <h2 className="text-2xl font-bold text-green-400">🎧 Écoute du Coran</h2>
             <p className="mt-2 text-gray-300">Écoutez le Coran récité par différents imams.</p>
