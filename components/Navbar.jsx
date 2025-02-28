@@ -18,8 +18,8 @@ export default function Navbar() {
         </Link>
 
         {/* Bouton Menu Hamburger (Mobile) */}
-        <button 
-          className="md:hidden text-white text-2xl focus:outline-none" 
+        <button
+          className="md:hidden text-white text-2xl focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <FaTimes /> : <FaBars />}
@@ -44,9 +44,9 @@ export default function Navbar() {
 
       {/* Menu Mobile */}
       {isOpen && (
-        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-90 flex flex-col items-center justify-center space-y-6 transition-transform duration-300">
-          <button 
-            className="absolute top-6 right-6 text-white text-3xl focus:outline-none" 
+        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-90 flex flex-col items-center justify-center space-y-6 transition-transform duration-300 z-[1000] backdrop-blur-md">
+          <button
+            className="absolute top-6 right-6 text-white text-3xl focus:outline-none"
             onClick={() => setIsOpen(false)}
           >
             <FaTimes />
@@ -59,7 +59,7 @@ export default function Navbar() {
             <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Récitation</span>
           </Link>
           <Link href="/ecoute">
-            <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Ecoute</span>
+            <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>Écoute</span>
           </Link>
           <Link href="/about">
             <span className="text-xl hover:text-green-400 cursor-pointer" onClick={() => setIsOpen(false)}>À propos</span>

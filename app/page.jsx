@@ -1,6 +1,6 @@
 "use client";
 
-import Link from 'next/link'; 
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -62,14 +62,16 @@ export default function Home() {
         >
           {recitateurs.map((recitateur, index) => (
             <SwiperSlide key={index} className="flex justify-center">
-              <div className="bg-gray-800 p-4 rounded-lg shadow-lg text-center">
-                <img
-                  src={recitateur.image}
-                  alt={recitateur.name}
-                  className="w-32 h-32 mx-auto rounded-full object-cover"
-                />
-                <h3 className="mt-2 text-xl font-bold">{recitateur.name}</h3>
-              </div>
+              <Link href={`/sourates`} passHref>
+                <div className="bg-gray-800 p-4 rounded-lg shadow-lg text-center cursor-pointer hover:bg-gray-700 transition">
+                  <img
+                    src={recitateur.image}
+                    alt={recitateur.name}
+                    className="w-32 h-32 mx-auto rounded-full object-cover"
+                  />
+                  <h3 className="mt-2 text-xl font-bold">{recitateur.name}</h3>
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
