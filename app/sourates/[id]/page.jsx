@@ -139,7 +139,7 @@ export default function Recitations({ params }) {
   if (!isClient) return null; // Avoid rendering anything until we're on the client
 
   return (
-    <div className="p-6 min-h-screen bg-gray-900 text-white">
+    <div className="p-6 pb-24 min-h-screen bg-gray-900 text-white">
       {reciterInfo && (
         <div className="text-center mb-6">
           <Image src={reciterInfo.image} alt={reciterInfo.name} width={128} height={128} className="mx-auto rounded-full" />
@@ -155,7 +155,7 @@ export default function Recitations({ params }) {
         ))}
       </div>
       {currentIndex !== null && (
-        <div className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 flex items-center justify-between shadow-lg">
+        <div className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 flex items-center justify-between shadow-lg w-full h-20">
           <Image src={reciterInfo.image} alt={reciterInfo.name} width={64} height={64} className="rounded-full" />
           <div className="flex flex-col text-center">
             <span className="text-lg font-medium">{sourates[currentIndex].name}</span>

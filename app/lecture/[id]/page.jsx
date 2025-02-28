@@ -40,7 +40,7 @@ export default function LecturePage({ params }) {
   }, [params.id]);
 
   if (error) return <p className="text-red-500">{error}</p>;
-  if (!sourate) return <p>Chargement...</p>;
+  if (!sourate) return <p className="text-white">Chargement...</p>;
 
   const toggleTranslation = () => {
     setShowTranslation(!showTranslation);
@@ -48,9 +48,11 @@ export default function LecturePage({ params }) {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl text-white font-bold">{sourate.englishName} - {sourate.name}</h1>
+      <h1 className="text-2xl text-white font-bold">
+        {sourate.englishName} - {sourate.name}
+      </h1>
       <p className="text-white">Révélation : {sourate.revelationType}</p>
-      <p className="mt-2 mb-4">Nombre de versets : {sourate.numberOfAyahs}</p>
+      <p className="mt-2 mb-4 text-white">Nombre de versets : {sourate.numberOfAyahs}</p>
 
       <button
         onClick={toggleTranslation}
@@ -61,10 +63,14 @@ export default function LecturePage({ params }) {
 
       <div className="space-y-4 mt-5">
         {sourate.ayahs.map((ayah, index) => (
-          <div key={ayah.number} className="border-b pb-2">
-            <p className="text-lg font-semibold text-right">{ayah.text}</p>
-            <p className="text-sm text-gray-500">Verset {ayah.numberInSurah}</p>
+          <div key={ayah.number} className="border-b border-gray-600 pb-2">
+            {/* Texte en arabe en doré */}
+            <p className="text-lg font-semibold text-right text-green-400">
+              {ayah.text}
+            </p>
+            <p className="text-sm text-gray-400">Verset {ayah.numberInSurah}</p>
 
+            {/* Traduction en bleu si affichée */}
             {showTranslation && translations[index] && (
               <p className="text-md mt-2 text-left text-blue-600">
                 {translations[index] || "Pas de traduction disponible"}
