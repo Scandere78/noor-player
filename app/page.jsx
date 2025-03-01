@@ -38,10 +38,10 @@ export default function Home() {
             <p className="mt-2 text-gray-300">Écoutez le Coran récité par différents imams.</p>
           </div>
         </Link>
-        <Link href="/dourous" passHref>
+        <Link href="/quizz" passHref>
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg cursor-pointer">
-            <h2 className="text-2xl font-bold text-green-400">🔍 Dourous</h2>
-            <p className="mt-2 text-gray-300">Recherchez rapidement une sourate ou un verset.</p>
+            <h2 className="text-2xl font-bold text-green-400">🎯 Quizz</h2>
+            <p className="mt-2 text-gray-300">Testez vos connaissances sur différents thèmes</p>
           </div>
         </Link>
       </div>
