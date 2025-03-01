@@ -113,14 +113,21 @@ export default function Lecture() {
       <div className="mt-6">
         <ul>
           {sourates.map((sourate) => (
-            <li key={sourate.position} className="mb-4 p-4 bg-gray-800 rounded-lg shadow-lg">
-              <h2 className="text-xl font-bold text-green-400">{sourate.nom}</h2>
-              <p className="text-lg text-gray-300">{sourate.nom_phonetique}</p>
+            <li
+              key={sourate.position}
+              className="mb-4 p-4 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
               <Link href={`/lecture/${sourate.position}`} passHref>
-                <span className="text-green-500 hover:text-green-300 mt-2 inline-block">Voir les détails</span>
-              </Link>
-              <Link href={`/lecture/${sourate.position}`} key={sourate.position}>
-                <p>{sourate.nom} ({sourate.nom_phonetique})</p>
+                <div className="cursor-pointer">
+                  <h2 className="text-xl font-bold text-green-400">
+                    <span className="text-green-300 text-lg">{sourate.position}. </span>
+                    {sourate.nom}
+                  </h2>
+                  <p className="text-lg text-gray-300">{sourate.nom_phonetique}</p>
+                  <span className="text-green-500 hover:text-green-300 transition-all duration-300 inline-block mt-2">
+                    Voir les détails
+                  </span>
+                </div>
               </Link>
             </li>
           ))}
