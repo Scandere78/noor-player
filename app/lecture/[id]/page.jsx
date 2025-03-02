@@ -74,9 +74,9 @@ export default function LecturePage({ params }) {
       {/* 🔹 Affichage des versets */}
       <div className="space-y-6 mt-5">
         {sourate.ayahs.map((ayah, index) => (
-          <div key={ayah.number} className="border-b border-gray-700 pb-3">
+          <div key={ayah.number} className="border-transparent pb-3">
             {/* Texte arabe avec glow vert */}
-            <p className="text-2xl font-bold text-right text-green-400 drop-shadow-md">
+            <p className="text-2xl font-bold text-right  text-green-700 drop-shadow-md">
               {ayah.text}
             </p>
 
@@ -85,7 +85,7 @@ export default function LecturePage({ params }) {
 
             {/* Traduction en français (affichée si activée) */}
             {showTranslation && (
-              <p className="text-md mt-2 text-left text-blue-400 italic">
+              <p className="text-md mt-2 text-left text-gray-300 italic">
                 {translation.ayahs[index]?.text || "Traduction non disponible"}
               </p>
             )}

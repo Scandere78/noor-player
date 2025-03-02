@@ -7,25 +7,39 @@ export default function QuizPage() {
     "Piliers de l'Islam": [
       { question: "Quel est le premier pilier de l'Islam ?", options: ["La prière", "Le jeûne", "La Shahada"], answer: "La Shahada", source: "Sahih Muslim 1" },
       { question: "Combien de rakats y a-t-il dans la prière du Fajr ?", options: ["2", "4", "3"], answer: "2", source: "Sahih Bukhari 1099" },
-      { question: "Combien y a-t-il de piliers de l'Islam ?", options: ["3", "5", "7"], answer: "5", source: "Sahih Bukhari 8" }
+      { question: "Combien y a-t-il de piliers de l'Islam ?", options: ["3", "5", "7"], answer: "5", source: "Sahih Bukhari 8" },
+      { question: "Quel est le troisième pilier de l'Islam ?", options: ["Le jeûne", "La zakat", "Le pèlerinage"], answer: "La zakat", source: "Sahih Bukhari 24" }
     ],
     "Ramadan": [
       { question: "Quel mois est sacré pour le jeûne ?", options: ["Rajab", "Shawwal", "Ramadan"], answer: "Ramadan", source: "Coran 2:185" },
       { question: "À quelle heure doit-on rompre le jeûne ?", options: ["Aube", "Coucher du soleil", "Minuit"], answer: "Coucher du soleil", source: "Sahih Bukhari 1954" },
-      { question: "Quel est le repas pris avant l'aube pendant le Ramadan ?", options: ["Iftar", "Suhur", "Taraweeh"], answer: "Suhur", source: "Sahih Muslim 1095" }
+      { question: "Quel est le repas pris avant l'aube pendant le Ramadan ?", options: ["Iftar", "Suhur", "Taraweeh"], answer: "Suhur", source: "Sahih Muslim 1095" },
+      { question: "Quelle nuit est meilleure que 1000 mois ?", options: ["Laylat al-Qadr", "Laylat al-Miraj", "Laylat al-Bara'ah"], answer: "Laylat al-Qadr", source: "Coran 97:3" }
     ],
     "Prophètes": [
       { question: "Qui est le dernier prophète de l'Islam ?", options: ["Moussa", "Issa", "Muhammad"], answer: "Muhammad", source: "Sahih Bukhari 33" },
-      { question: "Quel prophète a construit l'arche ?", options: ["Ibrahim", "Nuh", "Yusuf"], answer: "Nuh", source: "Coran 11:37" }
+      { question: "Quel prophète a construit l'arche ?", options: ["Ibrahim", "Nuh", "Yusuf"], answer: "Nuh", source: "Coran 11:37" },
+      { question: "Quel prophète a parlé dans son berceau ?", options: ["Issa", "Moussa", "Ibrahim"], answer: "Issa", source: "Coran 19:29-30" }
     ],
     "Tajweed": [
       { question: "Quel est le nom de la règle qui allonge la prononciation d'une lettre ?", options: ["Idgham", "Madd", "Qalqala"], answer: "Madd", source: "Règles du Tajweed" },
-      { question: "Quelle lettre n'est jamais prononcée dans la basmala ?", options: ["Alif", "Lam", "Nun"], answer: "Alif", source: "Règles du Tajweed" }
+      { question: "Quelle lettre n'est jamais prononcée dans la basmala ?", options: ["Alif", "Lam", "Nun"], answer: "Alif", source: "Règles du Tajweed" },
+      { question: "Combien de types de Qalqala existe-t-il ?", options: ["2", "3", "5"], answer: "5", source: "Règles du Tajweed" },
     ],
     "Aqida": [
       { question: "Combien de noms d'Allah sont mentionnés comme Asma'ul Husna ?", options: ["99", "100", "50"], answer: "99", source: "Sahih Bukhari 2736" },
       { question: "Quel est le premier devoir de chaque musulman ?", options: ["Apprendre le Coran", "Comprendre le Tawhid", "Prier 5 fois par jour"], answer: "Comprendre le Tawhid", source: "Coran 47:19" }
+    ],
+    "Coran": [
+      { question: "Combien y a-t-il de sourates dans le Coran ?", options: ["100", "114", "120"], answer: "114", source: "Coran 1:1" },
+      { question: "Quelle est la plus longue sourate du Coran ?", options: ["Al-Fatiha", "Al-Baqara", "Al-Ikhlas"], answer: "Al-Baqara", source: "Coran 2:1" },
+      { question: "Quelle sourate est appelée 'Le cœur du Coran' ?", options: ["Al-Baqara", "Ya-Sin", "Al-Kahf"], answer: "Ya-Sin", source: "Sahih Tirmidhi 2887" }
+    ],
+    "Histoire de l'Islam": [
+      { question: "Dans quelle ville est né le Prophète Muhammad ?", options: ["Médine", "La Mecque", "Damas"], answer: "La Mecque", source: "Biographie du Prophète" },
+      { question: "Quelle année marque le début du calendrier islamique ?", options: ["570", "622", "632"], answer: "622", source: "Hégire" }
     ]
+
   };
 
   const [selectedTheme, setSelectedTheme] = useState(Object.keys(quizzes)[0]);

@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
+
 
 export default function RootLayout({ children }) {
   return (
@@ -7,6 +9,7 @@ export default function RootLayout({ children }) {
       <body className="bg-gray-800">
         <Navbar />
         {children}
+        <Analytics />
       </body>
     </html>
   );
