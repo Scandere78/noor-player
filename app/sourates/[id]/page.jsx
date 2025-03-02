@@ -14,7 +14,8 @@ const recitationsMap = {
   "hussary": "mahmoud-khalil-hussary",
   "afs": "afs",
   "hudhaify": "hudhaify",
-  "sds": "sudais"
+  "sds": "sudais",
+  "maher": "maher"
 };
 
 const recitersInfo = {
@@ -25,7 +26,9 @@ const recitersInfo = {
   "hussary": { name: "Mahmoud Khalil Hussary", image: "/img/mahmoud.jpg" },
   "afs": { name: "Abu Faisal", image: "/img/mishary.webp" },
   "hudhaify": { name: "Hudhaify", image: "/images/hudhaify.jpg" },
-  "sds": { name: "Abdul Rahman Al-Sudais", image: "/img/sudais.jpg" }
+  "sds": { name: "Abdul Rahman Al-Sudais", image: "/img/sudais.jpg" },
+  'maher': { name: "Maher Al Meaqli", image: "/img/Maher.png" },
+
 };
 
 const souratesNames = [
@@ -107,9 +110,11 @@ export default function Recitations({ params }) {
           ? `https://server6.mp3quran.net/balilah/${sourateId}.mp3`
           : id === "afs"
             ? `https://server8.mp3quran.net/afs/${sourateId}.mp3`
-            : id === "sds"
-              ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
-              : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
+            : id == "maher"
+              ? `https://server12.mp3quran.net/maher/${sourateId}.mp3`
+              : id === "sds"
+                ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
+                : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
       return { id: sourateId, name, audioUrl };
     });
     setSourates(allSourates);
