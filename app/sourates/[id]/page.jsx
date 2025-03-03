@@ -15,7 +15,8 @@ const recitationsMap = {
   "afs": "afs",
   "hudhaify": "hudhaify",
   "sds": "sudais",
-  "maher": "maher"
+  "maher": "maher",
+  "h_dukhain": "h_dukhain"
 };
 
 const recitersInfo = {
@@ -28,6 +29,7 @@ const recitersInfo = {
   "hudhaify": { name: "Hudhaify", image: "/images/hudhaify.jpg" },
   "sds": { name: "Abdul Rahman Al-Sudais", image: "/img/sudais.jpg" },
   'maher': { name: "Maher Al Meaqli", image: "/img/Maher.png" },
+  "h_dukhain": { name: "Haitham Aldukhain", image: "/img/haitham.webp" },
 
 };
 
@@ -110,11 +112,13 @@ export default function Recitations({ params }) {
           ? `https://server6.mp3quran.net/balilah/${sourateId}.mp3`
           : id === "afs"
             ? `https://server8.mp3quran.net/afs/${sourateId}.mp3`
-            : id == "maher"
+            : id === "maher"
               ? `https://server12.mp3quran.net/maher/${sourateId}.mp3`
-              : id === "sds"
-                ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
-                : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
+              : id === "h_dukhain"
+                  ? `https://server16.mp3quran.net/h_dukhain/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
+                  : id === "sds"
+                    ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
+                    : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
       return { id: sourateId, name, audioUrl };
     });
     setSourates(allSourates);

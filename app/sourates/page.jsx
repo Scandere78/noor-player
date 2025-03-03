@@ -10,6 +10,7 @@ const recitateurs = [
   { id: 'afs', name: 'Mishary Al Afasi', image: '/img/mishary.webp' },
   { id: 'balilah', name: 'Bandar Balila', image: '/img/bandar-balila.jpg' },
   { id: 'sds', name: "Abdul Rahman Al-Sudais", image: "/img/sudais.jpg"},
+  { id: 'h_dukhain', name: "Haitham Aldukhain", image: "/img/haitham.webp"},
   { id: 'maher', name: "Maher Al Meaqli - Rewayat Hafs A'n Assem", image: "/img/Maher.png"},
 ];
 
