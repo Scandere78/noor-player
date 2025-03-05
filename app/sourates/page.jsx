@@ -12,6 +12,9 @@ const recitateurs = [
   { id: 'sds', name: "Abdul Rahman Al-Sudais", image: "/img/sudais.jpg"},
   { id: 'h_dukhain', name: "Haitham Aldukhain", image: "/img/haitham.webp"},
   { id: 'maher', name: "Maher Al Meaqli - Rewayat Hafs A'n Assem", image: "/img/Maher.png"},
+  { id: 'soufi-1', name: "Abderrashed Sofy", image: "/img/abdul-rashid-ali-sufi.png"},
+  {id: 'jhn', name: "Abdellah Al-Johany", image: "/img/al.jpg"},
+
 ];
 
 export default function Recitateurs() {
