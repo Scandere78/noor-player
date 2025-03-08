@@ -18,7 +18,9 @@ const recitationsMap = {
   "maher": "maher",
   "h_dukhain": "h_dukhain",
   "soufi-1": "soufi-1",
-  "jhn": "jhn"
+  "jhn": "jhn",
+  "aabd-lrhmn-lshh-t": "abdulrahman-al-shahat"
+
 
 };
 
@@ -34,7 +36,8 @@ const recitersInfo = {
   'maher': { name: "Maher Al Meaqli", image: "/img/Maher.png" },
   "h_dukhain": { name: "Haitham Aldukhain", image: "/img/haitham.webp" },
   "soufi-1": { name: "Abderrashed Sofy", image: "/img/abdul-rashid-ali-sufi.png" },
-  "jhn": { name: "Abdellah Al-Johany", image: "/img/al.jpg" }
+  "jhn": { name: "Abdellah Al-Johany", image: "/img/al.jpg" },
+  "aabd-lrhmn-lshh-t": { name: "Abdulrahman Al Shahat", image: "/img/abderrahman-shahat.jpg" }
 
 };
 
@@ -117,17 +120,19 @@ export default function Recitations({ params }) {
           ? `https://server6.mp3quran.net/balilah/${sourateId}.mp3`
           : id === "jhn"
             ? `https://server13.mp3quran.net/jhn/${sourateId}.mp3`
-          : id === "afs"
-            ? `https://server8.mp3quran.net/afs/${sourateId}.mp3`
-            : id === "maher"
-              ? `https://server12.mp3quran.net/maher/${sourateId}.mp3`
-              : id === "h_dukhain"
-                ? `https://server16.mp3quran.net/h_dukhain/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
-                : id === "soufi-1"
-                  ? `https://server16.mp3quran.net/soufi/Rewayat-Khalaf-A-n-Hamzah/${sourateId}.mp3`
-                  : id === "sds"
-                    ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
-                    : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
+            : id === "aabd-lrhmn-lshh-t"
+              ? `https://server16.mp3quran.net/a_alshahhat/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
+              : id === "afs"
+                ? `https://server8.mp3quran.net/afs/${sourateId}.mp3`
+                : id === "maher"
+                  ? `https://server12.mp3quran.net/maher/${sourateId}.mp3`
+                  : id === "h_dukhain"
+                    ? `https://server16.mp3quran.net/h_dukhain/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
+                    : id === "soufi-1"
+                      ? `https://server16.mp3quran.net/soufi/Rewayat-Khalaf-A-n-Hamzah/${sourateId}.mp3`
+                      : id === "sds"
+                        ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
+                        : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
       return { id: sourateId, name, audioUrl };
     });
     setSourates(allSourates);
@@ -162,7 +167,7 @@ export default function Recitations({ params }) {
     <div className="p-6 pb-24 min-h-screen bg-gray-900 text-white">
       {reciterInfo && (
         <div className="text-center mb-6">
-          <Image src={reciterInfo.image} alt={reciterInfo.name} width={128} height={128} className="mx-auto rounded-full" />
+          <Image src={reciterInfo.image} alt={reciterInfo.name} width={120} height={128} className="mx-auto rounded-full" />
           <h1 className="text-3xl font-bold text-green-500 mt-2">{reciterInfo.name}</h1>
         </div>
       )}
@@ -186,7 +191,7 @@ export default function Recitations({ params }) {
             audioRef.current.currentTime = newTime;
             setProgress(e.target.value);
           }} className="w-40 mx-4" />
-          <div className="flex space-x-4">
+          <div className="flex space-x-2">
             <FaStepBackward className="text-white text-2xl cursor-pointer" onClick={() => playAudio(Math.max(0, currentIndex - 1))} />
             {isPlaying ? (
               <FaPause className="text-green-400 text-3xl cursor-pointer" onClick={() => { audioRef.current.pause(); setIsPlaying(false); }} />
