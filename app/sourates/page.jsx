@@ -15,6 +15,7 @@ const recitateurs = [
   { id: 'soufi-1', name: "Abderrashed Sofy", image: "/img/abdul-rashid-ali-sufi.png"},
   {id: 'jhn', name: "Abdellah Al-Johany", image: "/img/al.jpg"},
   {id: 'aabd-lrhmn-lshh-t', name: "Abdulrahman Al Shahat", image: "/img/abderrahman-shahat.jpg"},
+  {id: 'islam', name: "Islam Subhi", image: "/img/islam.png"},
 
 ];
 

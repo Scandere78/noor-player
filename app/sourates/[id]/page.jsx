@@ -19,7 +19,8 @@ const recitationsMap = {
   "h_dukhain": "h_dukhain",
   "soufi-1": "soufi-1",
   "jhn": "jhn",
-  "aabd-lrhmn-lshh-t": "abdulrahman-al-shahat"
+  "aabd-lrhmn-lshh-t": "abdulrahman-al-shahat",
+  "islam": "islam-subhi",
 
 
 };
@@ -37,7 +38,8 @@ const recitersInfo = {
   "h_dukhain": { name: "Haitham Aldukhain", image: "/img/haitham.webp" },
   "soufi-1": { name: "Abderrashed Sofy", image: "/img/abdul-rashid-ali-sufi.png" },
   "jhn": { name: "Abdellah Al-Johany", image: "/img/al.jpg" },
-  "aabd-lrhmn-lshh-t": { name: "Abdulrahman Al Shahat", image: "/img/abderrahman-shahat.jpg" }
+  "aabd-lrhmn-lshh-t": { name: "Abdulrahman Al Shahat", image: "/img/abderrahman-shahat.jpg" },
+  "islam": { name: "Islam Subhi", image: "/img/islam.png" },
 
 };
 
@@ -128,11 +130,13 @@ export default function Recitations({ params }) {
                   ? `https://server12.mp3quran.net/maher/${sourateId}.mp3`
                   : id === "h_dukhain"
                     ? `https://server16.mp3quran.net/h_dukhain/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
-                    : id === "soufi-1"
-                      ? `https://server16.mp3quran.net/soufi/Rewayat-Khalaf-A-n-Hamzah/${sourateId}.mp3`
-                      : id === "sds"
-                        ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
-                        : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
+                    : id === "islam"
+                      ? `https://server8.mp3quran.net/islam/${sourateId}.mp3`
+                      : id === "soufi-1"
+                        ? `https://server16.mp3quran.net/soufi/Rewayat-Khalaf-A-n-Hamzah/${sourateId}.mp3`
+                        : id === "sds"
+                          ? `https://server11.mp3quran.net/sds/${sourateId}.mp3`
+                          : `https://www.al-hamdoulillah.com/coran/mp3/files/${reciterFolder}/${sourateId}.mp3`;
       return { id: sourateId, name, audioUrl };
     });
     setSourates(allSourates);
@@ -181,9 +185,9 @@ export default function Recitations({ params }) {
       </div>
       {currentIndex !== null && (
         <div className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 flex items-center justify-between shadow-lg w-full h-20">
-          <Image src={reciterInfo.image} alt={reciterInfo.name} width={64} height={64} className="rounded-full" />
+          <Image src={reciterInfo.image} alt={reciterInfo.name} width={50} height={50} className="rounded-full" />
           <div className="flex flex-col text-center">
-            <span className="text-lg font-medium">{sourates[currentIndex].name}</span>
+            <span className="text-base font-medium">{sourates[currentIndex].name}</span>
             <span className="text-sm text-gray-400">{(duration / 60).toFixed(2)} min</span>
           </div>
           <input type="range" min="0" max="100" value={progress} onChange={(e) => {
