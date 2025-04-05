@@ -131,7 +131,7 @@ export default function Recitations({ params }) {
                   : id === "h_dukhain"
                     ? `https://server16.mp3quran.net/h_dukhain/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
                     : id === "islam"
-                      ? `https://server8.mp3quran.net/islam/${sourateId}.mp3`
+                      ? `https://server14.mp3quran.net/islam/Rewayat-Hafs-A-n-Assem/${sourateId}.mp3`
                       : id === "soufi-1"
                         ? `https://server16.mp3quran.net/soufi/Rewayat-Khalaf-A-n-Hamzah/${sourateId}.mp3`
                         : id === "sds"
