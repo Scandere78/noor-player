@@ -119,9 +119,8 @@ export default function Lecture() {
     { "position": 114, "nom": "سورة الناس", "nom_phonetique": "An-Nas", "englishNameTranslation": "Mankind" }
 
 ]
-
   return (
-    <div className="p-6 bg-gray-900 text-white">
+    <div className="page-container navbar-safe px-6">
       <h1 className="text-3xl font-bold text-green-500 text-center">Liste des Sourates</h1>
       <div className="mt-6">
         <ul>

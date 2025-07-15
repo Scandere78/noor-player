@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <pattern id="islamicPattern" patternUnits="userSpaceOnUse" width="40" height="40">
+      <rect width="40" height="40" fill="#1a4a47"/>
+      <path d="M20 0L40 20L20 40L0 20Z" fill="#2a5a57" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <circle cx="200" cy="200" r="200" fill="url(#islamicPattern)"/>
+  <text x="200" y="180" text-anchor="middle" font-family="serif" font-size="80" font-weight="bold" fill="#a8d5a8">
+    Noor
+  </text>
+  <text x="200" y="260" text-anchor="middle" font-family="serif" font-size="80" font-weight="bold" fill="#a8d5a8">
+    Play
+  </text>
+</svg>

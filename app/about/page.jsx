@@ -2,9 +2,8 @@
 
 import { FaInstagram, FaSnapchat, FaTiktok } from "react-icons/fa";
 
-export default function About() {
-  return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center px-6">
+export default function About() {  return (
+    <div className="page-container navbar-safe flex flex-col items-center justify-center px-6">
       <h1 className="text-4xl font-bold text-green-500 mb-4">As Salam Aleykoom</h1>
       <p className="text-center text-gray-300 max-w-2xl">
         Bienvenue sur NoorPlay ! 🌙 Cette plateforme a été créée pour offrir un accès 

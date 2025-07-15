@@ -14,10 +14,8 @@ export default function Home() {
     { id: 2, name: "Mishary Rashid", image: "/img/mishary.webp" },
     { id: 3, name: "Saad Al Ghamdi", image: "/img/saad-al-ghamdi.jpg" },
     { id: 4, name: "Yasser Al Dosari", image: "/img/yasser-al-dossari.png" },
-  ];
-
-  return (
-    <div className="py-12 bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen">
+  ];  return (
+    <div className="py-12 bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen navbar-safe">
       {/* Présentation */}
       <div className="text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-5xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent">
