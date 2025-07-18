@@ -1,4 +1,8 @@
+'use client';
+
 import Link from "next/link";
+import ReadingTracker from "../../components/ReadingTracker";
+import { AuthProvider } from "../../contexts/AuthContext";
 
 export default function Lecture() {
   // Liste des sourates (exemple simplifié)
@@ -115,12 +119,12 @@ export default function Lecture() {
     { "position": 110, "nom": "سورة النصر", "nom_phonetique": "An-Nasr", "englishNameTranslation": "The Divine Support" },
     { "position": 111, "nom": "سورة المسد", "nom_phonetique": "Al-Masad", "englishNameTranslation": "The Palm Fiber" },
     { "position": 112, "nom": "سورة الإخلاص", "nom_phonetique": "Al-Ikhlas", "englishNameTranslation": "The Sincerity" },
-    { "position": 113, "nom": "سورة الفلق", "nom_phonetique": "Al-Falaq", "englishNameTranslation": "The Daybreak" },
-    { "position": 114, "nom": "سورة الناس", "nom_phonetique": "An-Nas", "englishNameTranslation": "Mankind" }
+    { "position": 113, "nom": "سورة الفلق", "nom_phonetique": "Al-Falaq", "englishNameTranslation": "The Daybreak" },    { "position": 114, "nom": "سورة الناس", "nom_phonetique": "An-Nas", "englishNameTranslation": "Mankind" }
+  ];
 
-]
   return (
-    <div className="page-container navbar-safe px-6">
+    <AuthProvider>
+      <div className="page-container navbar-safe px-6">
       <h1 className="text-3xl font-bold text-green-500 text-center">Liste des Sourates</h1>
       <div className="mt-6">
         <ul>
@@ -142,9 +146,15 @@ export default function Lecture() {
                 </div>
               </Link>
             </li>
-          ))}
-        </ul>
+          ))}        </ul>
       </div>
+      
+      {/* Reading Tracker pour la page générale */}
+      <ReadingTracker 
+        surahNumber={1} 
+        surahName="Liste des Sourates"
+        onVerseRead={(verse) => console.log(`Verset ${verse} lu`)}      />
     </div>
+    </AuthProvider>
   );
 }

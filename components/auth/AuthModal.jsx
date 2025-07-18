@@ -10,11 +10,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function AuthModal({ isOpen, onClose }) {
-  const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
+  const [isLogin, setIsLogin] = useState(true);  const [formData, setFormData] = useState({
     email: '',
     password: '',
-    name: ''
+    name: '',
+    confirmPassword: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -23,19 +23,21 @@ export default function AuthModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
-
-    try {
+    setLoading(true);    try {
       let result;
       if (isLogin) {
         result = await login(formData.email, formData.password);
       } else {
-        result = await register(formData.email, formData.password, formData.name);
+        if (formData.password !== formData.confirmPassword) {
+          setError('Les mots de passe ne correspondent pas');
+          return;
+        }
+        result = await register(formData.email, formData.name, formData.password);
       }
 
       if (result.success) {
         onClose();
-        setFormData({ email: '', password: '', name: '' });
+        setFormData({ email: '', password: '', name: '', confirmPassword: '' });
       } else {
         setError(result.error);
       }
@@ -99,12 +101,10 @@ export default function AuthModal({ isOpen, onClose }) {
                 >
                   Inscription
                 </TabsTrigger>
-              </TabsList>
-              
-              <form onSubmit={handleSubmit} className="space-y-4">
+              </TabsList>              <form onSubmit={handleSubmit} className="space-y-4">
                 {!isLogin && (
                   <div className="space-y-2">
-                    <Label htmlFor="name">Nom complet</Label>
+                    <Label htmlFor="name">Nom</Label>
                     <Input
                       id="name"
                       name="name"
@@ -145,6 +145,22 @@ export default function AuthModal({ isOpen, onClose }) {
                     className="bg-gray-700 border-gray-600 text-white"
                   />
                 </div>
+
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
+                    <Input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type="password"
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                      placeholder="••••••••"
+                      required={!isLogin}
+                      className="bg-gray-700 border-gray-600 text-white"
+                    />
+                  </div>
+                )}
 
                 {error && (
                   <div className="text-red-400 text-sm text-center">

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../contexts/AuthContext';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { User, LogOut, BarChart3, Menu, X, ChevronDown } from 'lucide-react';
@@ -16,6 +16,7 @@ const Navbar = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   
   const { user, logout } = useAuth();
+  const router = useRouter();
   const isLoggedIn = !!user;
   const pathname = usePathname();
   const isDashboardPage = pathname?.includes('/dashboard');
@@ -56,6 +57,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setShowDropdown(false);
+    router.push('/');
   };
 
   // Ne pas afficher la navbar sur les pages dashboard
@@ -130,9 +132,8 @@ const Navbar = () => {
                       <div className="px-4 py-2 border-b border-gray-100">
                         <p className="font-semibold text-gray-800">{user?.name}</p>
                         <p className="text-sm text-gray-500 truncate">{user?.email}</p>
-                      </div>
-                      <Link 
-                        href="/dashboard" 
+                      </div>                      <Link 
+                        href="/profile" 
                         className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-green-50 transition-colors"
                         onClick={() => setShowDropdown(false)}
                       >
@@ -146,9 +147,8 @@ const Navbar = () => {
                         className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-green-50 transition-colors"
                         onClick={() => setShowDropdown(false)}
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />                        </svg>
                         Dashboard
                       </Link>
                       <div className="border-t border-gray-100 my-1"></div>
@@ -335,13 +335,12 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-            
-            {/* Boutons du bas pour utilisateurs connectés */}
+              {/* Boutons du bas pour utilisateurs connectés */}
             {isLoggedIn && (
               <div className="px-2 pb-3">
                 <div className="border-t border-white/10 pt-2 mt-2 space-y-1">
                   <Link 
-                    href="/dashboard"
+                    href="/profile"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <div className="flex items-center px-3 py-3 rounded-lg text-white/90 hover:bg-white/10 hover:text-white transition-colors">
@@ -351,8 +350,7 @@ const Navbar = () => {
                       <span className="text-lg">Mon profil</span>
                     </div>
                   </Link>
-                  
-                  <Link 
+                    <Link 
                     href="/dashboard"
                     onClick={() => setIsMenuOpen(false)}
                   >

@@ -5,19 +5,42 @@ import { prisma } from '../../../../lib/prisma';
 
 export async function POST(request) {
   try {
-    const { email, password, name } = await request.json();
+    const { email, name, password } = await request.json();
 
-    // Vérifier si l'utilisateur existe déjà
-    const existingUser = await prisma.user.findUnique({
+    // Validation des champs
+    if (!email || !name || !password) {
+      return NextResponse.json({ 
+        message: 'Tous les champs sont requis' 
+      }, { status: 400 });
+    }
+
+    // Validation format email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ 
+        message: 'Format email invalide' 
+      }, { status: 400 });
+    }
+
+    // Validation mot de passe
+    if (password.length < 6) {
+      return NextResponse.json({ 
+        message: 'Le mot de passe doit contenir au moins 6 caractères' 
+      }, { status: 400 });    }
+
+    // Vérifier si l'email existe déjà
+    const existingUserByEmail = await prisma.user.findUnique({
       where: { email }
     });
 
-    if (existingUser) {
-      return NextResponse.json({ message: 'Utilisateur déjà existant' }, { status: 400 });
+    if (existingUserByEmail) {
+      return NextResponse.json({ 
+        message: 'Cet email est déjà utilisé' 
+      }, { status: 400 });
     }
 
     // Hasher le mot de passe
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     // Créer l'utilisateur avec ses stats
     const user = await prisma.user.create({
@@ -39,17 +62,15 @@ export async function POST(request) {
       }
     });
 
-    // Créer le token JWT
-    const token = jwt.sign(
-      { userId: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-
+    // Ne pas retourner le token JWT, juste les infos utilisateur
     return NextResponse.json({
-      message: 'Utilisateur créé avec succès',
-      user: { id: user.id, email: user.email, name: user.name },
-      token
+      message: 'Compte créé avec succès',
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        avatar: user.avatar
+      }
     }, { status: 201 });
 
   } catch (error) {

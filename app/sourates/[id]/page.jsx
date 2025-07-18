@@ -3,7 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { FaPlay, FaPause, FaStepForward, FaStepBackward } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStepForward, FaStepBackward, FaBookmark } from 'react-icons/fa';
+import ReadingTracker from '../../../components/ReadingTracker';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const recitationsMap = {
   "abdul-basit": "abdelbasset-abdessamad",
@@ -59,6 +61,7 @@ const souratesNames = [
 ];
 
 export default function Recitations({ params }) {
+  const { user, getReadingProgress } = useAuth();
   const router = useRouter();
   const { id } = params;
   const reciterFolder = recitationsMap[id];
@@ -68,13 +71,25 @@ export default function Recitations({ params }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isClient, setIsClient] = useState(false); // Track if we're on the client side
+  const [isClient, setIsClient] = useState(false);
+  const [userProgress, setUserProgress] = useState(null); // Progression de l'utilisateur
   const audioRef = useRef(null);
-
   // Ensure Audio is initialized on the client side
   useEffect(() => {
     setIsClient(true); // Set state when the component is mounted on the client
   }, []);
+
+  // Récupérer la progression de l'utilisateur
+  useEffect(() => {
+    const fetchUserProgress = async () => {
+      if (user) {
+        const progress = await getReadingProgress();
+        setUserProgress(progress);
+      }
+    };
+
+    fetchUserProgress();
+  }, [user, getReadingProgress]);
 
   useEffect(() => {
     if (isClient) {
@@ -162,26 +177,65 @@ export default function Recitations({ params }) {
     audioRef.current.ontimeupdate = () => {
       setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
     };
-    audioRef.current.onended = () => setIsPlaying(false);
+    audioRef.current.onended = () => setIsPlaying(false);  };
+  
+  // Fonction pour obtenir le statut de progression d'une sourate
+  const getSurahProgress = (surahNumber) => {
+    if (!userProgress?.userStats) return null;
+    
+    const { currentSurah, currentVerse } = userProgress.userStats;
+    
+    if (surahNumber < currentSurah) {
+      return 'completed'; // Sourate terminée
+    } else if (surahNumber === currentSurah) {
+      return { status: 'current', verse: currentVerse }; // Sourate en cours
+    }
+    return null; // Pas encore commencée
   };
 
   if (!isClient) return null; // Avoid rendering anything until we're on the client
-
   return (
-    <div className="p-6 pb-24 min-h-screen bg-gray-900 text-white">
-      {reciterInfo && (
-        <div className="text-center mb-6">
-          <Image src={reciterInfo.image} alt={reciterInfo.name} width={120} height={128} className="mx-auto rounded-full" />
-          <h1 className="text-3xl font-bold text-green-500 mt-2">{reciterInfo.name}</h1>
-        </div>
-      )}
-      <div className="w-full max-w-2xl mx-auto text-left">
-        {sourates.map((sourate, index) => (
-          <div key={sourate.id} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg mb-2 hover:bg-gray-700" onClick={() => playAudio(index)}>
-            <span className="text-lg font-medium">{sourate.id}. {sourate.name}</span>
-            <FaPlay className="text-green-400" />
+      <div className="p-6 pb-24 min-h-screen bg-gray-900 text-white">
+        {reciterInfo && (
+          <div className="text-center mb-6">
+            <Image src={reciterInfo.image} alt={reciterInfo.name} width={120} height={128} className="mx-auto rounded-full" />
+            <h1 className="text-3xl font-bold text-green-500 mt-2">{reciterInfo.name}</h1>
           </div>
-        ))}
+        )}        <div className="w-full max-w-2xl mx-auto text-left">
+        {sourates.map((sourate, index) => {
+          const surahNumber = index + 1;
+          const progressInfo = getSurahProgress(surahNumber);
+          
+          return (
+            <div 
+              key={sourate.id} 
+              className={`flex items-center justify-between p-4 rounded-lg mb-2 hover:bg-gray-700 ${
+                progressInfo?.status === 'current' ? 'bg-green-800 border border-green-600' : 
+                progressInfo === 'completed' ? 'bg-blue-800 border border-blue-600' : 
+                'bg-gray-800'
+              }`}
+              onClick={() => playAudio(index)}
+            >
+              <div className="flex items-center space-x-3">
+                {progressInfo === 'completed' && (
+                  <div className="text-blue-400 text-sm">✓</div>
+                )}
+                {progressInfo?.status === 'current' && (
+                  <div className="text-green-400 text-sm">
+                    <FaBookmark />
+                  </div>
+                )}
+                <span className="text-lg font-medium">{sourate.id}. {sourate.name}</span>
+                {progressInfo?.status === 'current' && (
+                  <span className="text-green-300 text-sm bg-green-900 px-2 py-1 rounded">
+                    Verset {progressInfo.verse}
+                  </span>
+                )}
+              </div>
+              <FaPlay className="text-green-400" />
+            </div>
+          );
+        })}
       </div>
       {currentIndex !== null && (
         <div className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 flex items-center justify-between shadow-lg w-full h-20">
@@ -194,8 +248,7 @@ export default function Recitations({ params }) {
             const newTime = (e.target.value / 100) * audioRef.current.duration;
             audioRef.current.currentTime = newTime;
             setProgress(e.target.value);
-          }} className="w-40 mx-4" />
-          <div className="flex space-x-2">
+          }} className="w-40 mx-4" />          <div className="flex space-x-2">
             <FaStepBackward className="text-white text-2xl cursor-pointer" onClick={() => playAudio(Math.max(0, currentIndex - 1))} />
             {isPlaying ? (
               <FaPause className="text-green-400 text-3xl cursor-pointer" onClick={() => { audioRef.current.pause(); setIsPlaying(false); }} />
@@ -205,7 +258,14 @@ export default function Recitations({ params }) {
             <FaStepForward className="text-white text-2xl cursor-pointer" onClick={() => playAudio(Math.min(sourates.length - 1, currentIndex + 1))} />
           </div>
         </div>
-      )}
+      )}      {/* Reading Tracker pour suivre la lecture */}
+      <ReadingTracker 
+        surahNumber={currentIndex !== null ? currentIndex + 1 : 1} 
+        surahName={currentIndex !== null ? souratesNames[currentIndex] : "Récitation"} 
+        onVerseRead={(verse) => {
+          console.log(`Verset ${verse} lu dans ${currentIndex !== null ? souratesNames[currentIndex] : "la récitation"}`);
+        }}
+      />
     </div>
   );
 }
