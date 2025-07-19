@@ -64,8 +64,6 @@ export async function POST(request) {
       message: 'Erreur serveur',
       error: process.env.NODE_ENV === 'development' ? error.message : 'Erreur interne'
     }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -86,7 +84,5 @@ export async function GET() {
       message: 'Erreur de connexion à la base de données',
       error: process.env.NODE_ENV === 'development' ? error.message : 'Erreur interne'
     }, { status: 503 });
-  } finally {
-    await prisma.$disconnect();
   }
 }
