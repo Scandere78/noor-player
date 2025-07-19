@@ -5,11 +5,5 @@
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "process.env.DATABASE_URL",
-    "JWT_SECRET": "@jwt_secret",
-    "NEXTAUTH_URL": "@nextauth_url",
-    "NEXTAUTH_SECRET": "@nextauth_secret"
-  }
+  ]
 }
