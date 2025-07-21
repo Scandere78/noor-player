@@ -714,7 +714,7 @@ function QuizPageContent() {
                 >
                   Retour au menu
                 </Button>
-                
+
                 <Button
                   onClick={() => {
                     setShowResults(false);
@@ -724,6 +724,18 @@ function QuizPageContent() {
                 >
                   Rejouer
                 </Button>
+
+                {user && (
+                  <Button
+                    onClick={() => {
+                      window.location.href = '/dashboard';
+                      setTimeout(() => window.location.reload(), 500);
+                    }}
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Voir mon dashboard
+                  </Button>
+                )}
               </div>
 
               {!user && (

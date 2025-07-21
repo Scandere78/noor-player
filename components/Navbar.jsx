@@ -58,6 +58,7 @@ const Navbar = () => {
     logout();
     setShowDropdown(false);
     router.push('/');
+    setTimeout(() => window.location.reload(), 500);
   };
 
   // Ne pas afficher la navbar sur les pages dashboard
