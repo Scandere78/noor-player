@@ -45,7 +45,9 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        // Ne pas connecter automatiquement, juste retourner succès
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        setUser(data.user);
         return { success: true };
       } else {
         return { success: false, error: data.message };
