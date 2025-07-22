@@ -38,6 +38,7 @@ export default function AuthModal({ isOpen, onClose }) {
       if (result.success) {
         onClose();
         setFormData({ email: '', password: '', name: '', confirmPassword: '' });
+        setIsLogin(true); // Bascule sur l'onglet Connexion après inscription
       } else {
         setError(result.error);
       }
